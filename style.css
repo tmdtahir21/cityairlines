@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ffffff;
+            height: 10vh;
+            padding: 0 90px;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 4px 15px;
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 20px;
+            color: #32086d;
+         
+        }
+
+        .logo {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 25px;
+            text-transform: uppercase;
+        }
+
+        a:hover {
+            color: #05386b;
+            border: 2px solid #05386b;
+            background-color: transparent;
+        }
+
+        .home {
+            width: 100%;
+            height: 100vh;
+            background-image: url("img/airplane.jpg");
+            background-position: center;
+            background-size: cover;
+            /* background-color: #3a86ff; */
+            display: flex;
+            align-items: center;
+            /* justify-content: center; */
+            flex-direction: column;
+        }
+
+        .home p{
+          background-color: #ffffff;
+          margin: 10px;
+          padding: 20px;
+
+        }
+
+        .booking {
+            height: 180vh;
+            /* background-color: #fb5607; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-image: url("img/airplane1.jpg");
+            background-position: center;
+            background-size: cover;
+        }
+
+        .about-us {
+            height: 100vh;
+            background-color: #ff006e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-image: url("img/about.jpg");
+            background-position: center;
+            background-size: cover;
+            color: #ffffff;
+        }
+
+        .contact-us {
+            height: 100vh;
+            background-color: #8338ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url("img/image3.jpg");
+            background-position: center;
+            background-size: cover;
+        }
+        .contact-us2 {
+            height: 100vh;
+            background-color: #f6efff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tracking{
+          height: 100vh;
+            background-color: #38d7ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url("img/tracking.jpg");
+            background-position: center;
+            background-size: cover;
+        }
+        .login-page{
+          height: 100vh;
+            background-color: #38d7ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url("img/login.jpg");
+            background-position: center;
+            background-size: cover;
+            flex-direction: column;
+        }
+        .signup-page{
+          height: 100vh;
+            background-color: #bfec38;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url("img/login.jpg");
+            background-position: center;
+            background-size: cover;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 100px;
+            color: #ffffff;
+            margin: 50px;
+        }
+        
+
+
+     
+     .container {
+      max-width: 400px;
+      width: 75vw;
+      margin: 0 auto;
+      padding: 50px;
+    }
+    
+    .booking-form {
+      background-color: #f4f4f4;
+      padding: 50px 0;
+    }
+    
+    .registration-form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      font-weight: bold;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="time"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    button {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    button:hover {
+      background-color: #555;
+    }
+    
+
+
+
+        footer {
+            background-color: #ffbe0b;
+            height: 25px;
+            text-align: center;
+            font-weight: 400;
+        }
+
+
+/* Image gallery styles */
+.image-gallery {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.image-gallery img {
+  width: 30%; /* Adjust image width as needed */
+  border-radius: 8px;
+}
+
+/* CSS styles */
+
+/* Contact section styles */
+.contact-us {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.contact-details {
+  width: 45%;
+}
+
+.contact-details h2 {
+  margin-bottom: 10px;
+}
+
+.contact-details p {
+  margin-bottom: 20px;
+}
+
+.contact-details ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.contact-details li {
+  margin-bottom: 10px;
+}
+
+.social-links {
+  display: flex;
+}
+
+.social-links a {
+  margin-right: 10px;
+}
+
+.social-links img {
+  width: 50px;
+}
+
+.contact-image {
+  width: 35vw;
+}
+
+.contact-image img {
+  width: 100%;
+  border-radius: 30px;
+  box-shadow: #333  ;
+}
