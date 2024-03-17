@@ -57,8 +57,11 @@ document.addEventListener("DOMContentLoaded", function() {
           return;
       }
 
+      // Generate a ticket number
+      var ticketNumber = generateTicketNumber();
+
       // If all validations pass, construct and display the final message
-      var finalMessage = "Mr. " + name + ", your ticket has been successfully booked from " + from + " to " + to + ". Thank you!";
+      var finalMessage = "Mr. " + name + ", your ticket number " + ticketNumber + " has been successfully booked from " + from + " to " + to + ". Thank you!";
       alert(finalMessage);
       form.reset(); // Reset the form fields
   });
@@ -82,22 +85,19 @@ document.addEventListener("DOMContentLoaded", function() {
           element.textContent = "";
       });
   }
+
+  // Ticket Number Generation
+  var ticketNumbers = [];
+
+  function generateTicketNumber() {
+      var ticketNumber;
+      do {
+          ticketNumber = Math.floor(10000000 + Math.random() * 90000000);
+      } while (ticketNumbers.includes(ticketNumber));
+      ticketNumbers.push(ticketNumber);
+      return ticketNumber;
+  }
 });
-
-
-
-
-// Ticket Number Generation
-var ticketNumbers = [];
-
-function generateTicketNumber() {
-  var ticketNumber;
-  do {
-      ticketNumber = Math.floor(10000000 + Math.random() * 90000000);
-  } while (ticketNumbers.includes(ticketNumber));
-  ticketNumbers.push(ticketNumber);
-  return ticketNumber;
-}
 
 // Ticket Number Cancellation
 
