@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
   var form = document.getElementById("registrationForm");
-  var bookButton = form.querySelector("button[type='submit']");
   
-  // Function to check if any form field is empty
-  function checkEmptyFields() {
+  form.addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the default form submission
+      
+      // Validate the form fields
       var name = document.getElementById("name").value.trim();
+      var age = document.getElementById("age").value.trim();
       var from = document.getElementById("from").value.trim();
       var to = document.getElementById("to").value.trim();
       var date = document.getElementById("date").value.trim();
@@ -12,11 +14,54 @@ document.addEventListener("DOMContentLoaded", function() {
       var phone = document.getElementById("phone").value.trim();
       var email = document.getElementById("email").value.trim();
       
-      if (!name || !from || !to || !date || !time || !phone || !email) {
-          return true; // At least one field is empty
+      // Clear previous error messages
+      clearErrorMessages();
+      
+      // Check for empty fields
+      if (!name) {
+          displayErrorMessage("nameError", "Please enter your name.");
+          return;
       }
-      return false; // No empty fields
-  }
+      if (!age) {
+          displayErrorMessage("ageError", "Please enter your age.");
+          return;
+      }
+      if (!from) {
+          displayErrorMessage("fromError", "Please enter the departure location.");
+          return;
+      }
+      if (!to) {
+          displayErrorMessage("toError", "Please enter the destination.");
+          return;
+      }
+      if (!date) {
+          displayErrorMessage("dateError", "Please select a date.");
+          return;
+      }
+      if (!time) {
+          displayErrorMessage("timeError", "Please select a time.");
+          return;
+      }
+      if (!phone) {
+          displayErrorMessage("phoneError", "Please enter your phone number.");
+          return;
+      }
+      if (!email) {
+          displayErrorMessage("emailError", "Please enter your email address.");
+          return;
+      }
+      
+      // Validate email format
+      if (!validateEmail(email)) {
+          displayErrorMessage("emailError", "Please enter a valid email address.");
+          return;
+      }
+
+      // If all validations pass, construct and display the final message
+      var finalMessage = "Mr. " + name + ", your ticket has been successfully booked from " + from + " to " + to + ". Thank you!";
+      alert(finalMessage);
+      form.reset(); // Reset the form fields
+  });
   
   // Function to validate email using regular expression
   function validateEmail(email) {
@@ -24,54 +69,23 @@ document.addEventListener("DOMContentLoaded", function() {
       return regex.test(email);
   }
 
-  // Function to display an alert message
-  function showAlert(message) {
-      alert(message);
+  // Function to display an error message
+  function displayErrorMessage(elementId, message) {
+      var errorElement = document.getElementById(elementId);
+      errorElement.textContent = message;
   }
 
-  // Function to handle form submission
-  function handleFormSubmission(event) {
-      event.preventDefault(); // Prevent the default form submission
-
-      // Validate the form fields
-      var name = document.getElementById("name").value.trim();
-      var from = document.getElementById("from").value.trim();
-      var to = document.getElementById("to").value.trim();
-      var date = document.getElementById("date").value.trim();
-      var time = document.getElementById("time").value.trim();
-      var phone = document.getElementById("phone").value.trim();
-      var email = document.getElementById("email").value.trim();
-      
-      if (checkEmptyFields()) {
-          showAlert("Please fill in all the data to proceed booking.");
-          return;
-      }
-
-      if (!validateEmail(email)) {
-          showAlert("Please enter a valid email address.");
-          return;
-      }
-
-      // Generate ticket number
-      var ticketNumber = generateTicketNumber();
-
-      // If all validations pass, construct and display the final message
-      var finalMessage = "Mr. " + name + ", your ticket (Ticket Number: " + ticketNumber + ") has been successfully booked from " + from + " to " + to + ". Thank you!";
-      showAlert(finalMessage);
-      form.reset(); // Reset the form fields
+  // Function to clear all error messages
+  function clearErrorMessages() {
+      var errorElements = document.querySelectorAll(".error-message");
+      errorElements.forEach(function(element) {
+          element.textContent = "";
+      });
   }
-
-  // Event listener for form submission
-  form.addEventListener("submit", handleFormSubmission);
-
-  // Event listener for the book button click
-  bookButton.addEventListener("click", function(event) {
-      if (checkEmptyFields()) {
-          event.preventDefault(); // Prevent default form submission
-          showAlert("Please fill in all the data to proceed booking.");
-      }
-  });
 });
+
+
+
 
 // Ticket Number Generation
 var ticketNumbers = [];
@@ -86,13 +100,17 @@ function generateTicketNumber() {
 }
 
 // Ticket Number Cancellation
+
 function deleteTicket() {
   var pname = document.getElementById("pname").value;
   var ticketNumber = document.getElementById("ticketNumber").value;
 
+  // Reset error message
+  document.getElementById('ticketNumberError').textContent = '';
+
   // Check if ticketNumber is empty
   if (!ticketNumber.trim()) {
-      alert("Enter your ticket number.");
+      document.getElementById('ticketNumberError').textContent = 'Enter your ticket details.';
       return; // Exit the function early
   }
 
@@ -101,17 +119,36 @@ function deleteTicket() {
 }
 
 
+// Login
 
 document.addEventListener('DOMContentLoaded', function() {
   var loginForm = document.getElementById('loginForm');
+  var loginButton = document.getElementById('loginButton');
+  var emailInput = document.getElementById('email');
+  var passwordInput = document.getElementById('password');
+  var emailError = document.getElementById('emailError');
+  var passwordError = document.getElementById('passwordError');
 
-  loginForm.addEventListener('submit', function(event) {
-    event.preventDefault();
+  // Add event listener to the login button
+  loginButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default button click behavior
+
+    // Get email and password values
+    var email = emailInput.value;
+    var password = passwordInput.value;
+
+    // Check if email and password are not empty
+    if (!email || !password) {
+      if (!email) {
+        showError(emailInput, emailError, "Please enter your email.");
+      }
+      if (!password) {
+        showError(passwordInput, passwordError, "Please enter your password.");
+      }
+      return; // Exit function if email or password is empty
+    }
 
     // Example check for valid credentials (replace with your authentication logic)
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-
     if (email === "admin@mail.com" && password === "admin") {
       alert("Login successful!");
       window.location.href = "index.html"; // Redirect to index.html after successful login
@@ -119,7 +156,14 @@ document.addEventListener('DOMContentLoaded', function() {
       alert("Invalid email or password. Please try again.");
     }
   });
+
+  // Function to show error message and change input border color
+  function showError(input, errorElement, message) {
+    input.classList.add('error'); // Add error class to input field
+    errorElement.textContent = message; // Set error message
+  }
 });
+
 
 // Logout Function
 document.addEventListener('DOMContentLoaded', function() {
@@ -135,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Signup Page
+
 document.addEventListener('DOMContentLoaded', function () {
   var signupForm = document.getElementById('signupForm');
 
@@ -146,17 +191,52 @@ document.addEventListener('DOMContentLoaded', function () {
       var password = document.getElementById('spassword').value;
       var confirmPassword = document.getElementById('sconfirmpassword').value;
 
+      // Reset error messages
+      document.querySelectorAll('.error-message').forEach(function (error) {
+          error.textContent = '';
+      });
+
       // Check if any field is empty
-      if (!name || !email || !password || !confirmPassword) {
-          alert("Please fill in all fields.");
-          return; // Exit function if any field is empty
+      if (!name) {
+          document.getElementById('nameError').textContent = 'Please enter your name.';
+          return;
+      }
+
+      if (!email) {
+          document.getElementById('emailError').textContent = 'Please enter your email address.';
+          return;
+      }
+
+      // Validate email using regular expression
+      if (!validateEmail(email)) {
+          document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+          return;
+      }
+
+      if (!password) {
+          document.getElementById('passwordError').textContent = 'Please enter your password.';
+          return;
+      }
+
+      if (!confirmPassword) {
+          document.getElementById('confirmPasswordError').textContent = 'Please confirm your password.';
+          return;
       }
 
       if (password !== confirmPassword) {
-          alert("Your Passwords don't match. Please try again.");
-      } else {
-          alert("Hi " + name + "! Thanks for signing up. Welcome to our website.");
-          window.location.href = "login.html"; // Redirect to login page
+          document.getElementById('confirmPasswordError').textContent = "Your Passwords don't match. Please try again.";
+          return;
       }
+
+      // If all validations pass
+      alert("Hi " + name + "! Thanks for signing up. Welcome to our website.");
+      window.location.href = "login.html"; // Redirect to login page
   });
+
+  // Function to validate email using regular expression
+  function validateEmail(email) {
+      var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+  }
 });
+

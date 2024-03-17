@@ -48,10 +48,9 @@
             background-image: url("img/airplane.jpg");
             background-position: center;
             background-size: cover;
-            /* background-color: #3a86ff; */
+            background-color: #3a86ff;
             display: flex;
             align-items: center;
-            /* justify-content: center; */
             flex-direction: column;
         }
 
@@ -64,7 +63,7 @@
 
         .booking {
             height: 180vh;
-            /* background-color: #fb5607; */
+            background-color: #fb5607;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -274,4 +273,13 @@
   width: 100%;
   border-radius: 30px;
   box-shadow: #333  ;
+}
+
+.error {
+  border-color: red; 
+}
+
+.error-message {
+  color: red; 
+  font-size: 14px; 
 }

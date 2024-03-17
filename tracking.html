@@ -24,10 +24,9 @@
   </header>
 
   <div class="tracking" id="tracking">
-    <h1>Cancel Ticket </h1>
+    <h1>Cancel Ticket</h1>
     <div class="container cancel-form">
         <form action="">
-
             <label for="pname">Name:</label>
             <input type="text" id="pname" name="pname" required>
             <br>
@@ -37,12 +36,13 @@
             <label for="ticketNumber">Enter Ticket Number:</label>
             <input type="text" id="ticketNumber" name="ticketNumber" required>
             <br>
+            <span class="error-message" id="ticketNumberError"></span>
             <br>
             <button type="button" onclick="deleteTicket()">Cancel</button>
         </form>
-
     </div>
-  </div>
+</div>
+
 
  
   <footer>
