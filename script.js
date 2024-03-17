@@ -4,11 +4,16 @@ document.addEventListener("DOMContentLoaded", function() {
   
   // Function to check if any form field is empty
   function checkEmptyFields() {
-      var fields = form.querySelectorAll("input");
-      for (var i = 0; i < fields.length; i++) {
-          if (fields[i].value.trim() === "") {
-              return true; // At least one field is empty
-          }
+      var name = document.getElementById("name").value.trim();
+      var from = document.getElementById("from").value.trim();
+      var to = document.getElementById("to").value.trim();
+      var date = document.getElementById("date").value.trim();
+      var time = document.getElementById("time").value.trim();
+      var phone = document.getElementById("phone").value.trim();
+      var email = document.getElementById("email").value.trim();
+      
+      if (!name || !from || !to || !date || !time || !phone || !email) {
+          return true; // At least one field is empty
       }
       return false; // No empty fields
   }
@@ -18,70 +23,67 @@ document.addEventListener("DOMContentLoaded", function() {
       var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return regex.test(email);
   }
-  
-  
-  
+
+  // Function to display an alert message
+  function showAlert(message) {
+      alert(message);
+  }
+
+  // Function to handle form submission
+  function handleFormSubmission(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Validate the form fields
+      var name = document.getElementById("name").value.trim();
+      var from = document.getElementById("from").value.trim();
+      var to = document.getElementById("to").value.trim();
+      var date = document.getElementById("date").value.trim();
+      var time = document.getElementById("time").value.trim();
+      var phone = document.getElementById("phone").value.trim();
+      var email = document.getElementById("email").value.trim();
+      
+      if (checkEmptyFields()) {
+          showAlert("Please fill in all the data to proceed booking.");
+          return;
+      }
+
+      if (!validateEmail(email)) {
+          showAlert("Please enter a valid email address.");
+          return;
+      }
+
+      // Generate ticket number
+      var ticketNumber = generateTicketNumber();
+
+      // If all validations pass, construct and display the final message
+      var finalMessage = "Mr. " + name + ", your ticket (Ticket Number: " + ticketNumber + ") has been successfully booked from " + from + " to " + to + ". Thank you!";
+      showAlert(finalMessage);
+      form.reset(); // Reset the form fields
+  }
+
+  // Event listener for form submission
+  form.addEventListener("submit", handleFormSubmission);
+
+  // Event listener for the book button click
   bookButton.addEventListener("click", function(event) {
       if (checkEmptyFields()) {
           event.preventDefault(); // Prevent default form submission
-          alert("Please fill in all the data to proceed booking.");
+          showAlert("Please fill in all the data to proceed booking.");
       }
-      else {
-          var emailField = document.getElementById("email");
-          var email = emailField.value.trim();
-          if (!validateEmail(email)) {
-              event.preventDefault(); // Prevent default form submission
-              alert("Please enter a valid email address.");
-          }
-          
-      }
-  });
-  
-  form.addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent the default form submission
-      
-      // Validate the form fields
-      var name = document.getElementById("name").value;
-      var from = document.getElementById("from").value;
-      var to = document.getElementById("to").value;
-      var phone = document.getElementById("phone").value;
-      var email = document.getElementById("email").value;
-      var password = document.getElementById("password").value;
-      var rePassword = document.getElementById("re-password").value;
-      
-      if (name.trim() === "" || from.trim() === "" || to.trim() === "" || phone.trim() === "" || email.trim() === "" || password.trim() === "" || rePassword.trim() === "") {
-          alert("Please fill in all the data to proceed booking.");
-          return;
-      }
-      if (password !== rePassword) {
-          alert("Passwords do not match.");
-          return;
-      }
-      
-      // If all validations pass, construct and display the final message
-      var finalMessage = "Mr. " + name + " Your Ticket has been Successfully Booking from " + from + " to " + to + "Thanks You!";
-      alert(finalMessage);
-      form.reset(); // Reset the form fields
   });
 });
 
 // Ticket Number Generation
 var ticketNumbers = [];
 
-        function generateTicketNumber() {
-            var ticketNumber;
-            do {
-                ticketNumber = Math.floor(10000000 + Math.random() * 90000000);
-            } while (ticketNumbers.includes(ticketNumber));
-            return ticketNumber;
-        }
-
-        function bookTicket() {
-            var ticketNumber = generateTicketNumber();
-            ticketNumbers.push(ticketNumber);
-            alert("Your unique ticket number is: " + ticketNumber);
-        }
-
+function generateTicketNumber() {
+  var ticketNumber;
+  do {
+      ticketNumber = Math.floor(10000000 + Math.random() * 90000000);
+  } while (ticketNumbers.includes(ticketNumber));
+  ticketNumbers.push(ticketNumber);
+  return ticketNumber;
+}
 
 // Ticket Number Cancellation
 function deleteTicket() {
@@ -132,3 +134,29 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Signup Page
+document.addEventListener('DOMContentLoaded', function () {
+  var signupForm = document.getElementById('signupForm');
+
+  signupForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      var name = document.getElementById('sname').value;
+      var email = document.getElementById('semail').value;
+      var password = document.getElementById('spassword').value;
+      var confirmPassword = document.getElementById('sconfirmpassword').value;
+
+      // Check if any field is empty
+      if (!name || !email || !password || !confirmPassword) {
+          alert("Please fill in all fields.");
+          return; // Exit function if any field is empty
+      }
+
+      if (password !== confirmPassword) {
+          alert("Your Passwords don't match. Please try again.");
+      } else {
+          alert("Hi " + name + "! Thanks for signing up. Welcome to our website.");
+          window.location.href = "login.html"; // Redirect to login page
+      }
+  });
+});
